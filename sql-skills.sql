@@ -25,17 +25,19 @@ SELECT COUNT(*)
 FROM invoice 
 WHERE billing_country = 'USA'
 
-SELECT *
-FROM invoice 
-ORDER BY total DESC;
+SELECT MAX(total)
+FROM invoice;
 
-SELECT *
-FROM invoice 
-ORDER BY total ASC;
+SELECT MIN(total)
+FROM invoice
 
 SELECT *
 FROM invoice 
 WHERE total > 5;
+
+SELECT COUNT(invoice_id) 
+FROM invoice
+WHERE total < 5;
 
 SELECT SUM(total)
 FROM invoice;
@@ -47,7 +49,7 @@ JOIN invoice_line il
 ON i.invoice_id = il.invoice_id
 WHERE unit_price > .99;
 
-SELECT i.invoice_date, c.first_name, c.last_name, total
+SELECT i.invoice_date, c.first_name, c.last_name, i.total
 FROM invoice i
 JOIN customer c
 ON i.customer_id = c.customer_id;
